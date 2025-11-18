@@ -16,12 +16,26 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install .NET 10 SDK
-RUN add-apt-repository ppa:dotnet/backports \
-    && apt-get update \
-    && apt-get install -y dotnet-sdk-10.0 \
+# Install .NET 10 SDK dependencies 
+RUN apt-get update && apt-get install -y \
+    ca-certificates \
+    libc6 \
+    libgcc-s1 \
+    libgssapi-krb5-2 \
+    libicu74 \
+    libstdc++6 \
+    tzdata \
+    zlib1g \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Install .NET 10 SDK
+RUN curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh \
+    && chmod +x dotnet-install.sh \
+    && ./dotnet-install.sh --channel 10.0 --install-dir /opt/dotnet \
+    && rm dotnet-install.sh \
+    export DOTNET_ROOT=/opt/dotnet \
+    export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 # Install Hack Nerd Font for terminal use
 RUN mkdir -p ~/.fonts && wget -q -P ~/.fonts https://github.com/ryanoasis/nerd-fonts/releases/latest/download/Hack.zip \
