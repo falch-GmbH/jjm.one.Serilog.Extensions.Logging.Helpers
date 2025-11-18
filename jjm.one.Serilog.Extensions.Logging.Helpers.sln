@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Serilog.Extensions.Logging.Helpers", "jjm.one.Serilog.Extensions.Logging.Helpers\jjm.one.Serilog.Extensions.Logging.Helpers.csproj", "{2F70667F-DFE5-4A77-9CD7-4BC0FA9BA3D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Serilog.Extensions.Logging.Helpers", "src\jjm.one.Serilog.Extensions.Logging.Helpers\jjm.one.Serilog.Extensions.Logging.Helpers.csproj", "{2F70667F-DFE5-4A77-9CD7-4BC0FA9BA3D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Serilog.Extensions.Logging.Helpers.Tests", "jjm.one.Serilog.Extensions.Logging.Helpers.Tests\jjm.one.Serilog.Extensions.Logging.Helpers.Tests.csproj", "{C4C6C89D-E6FA-403F-9FFE-34F3D7E4ED5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjm.one.Serilog.Extensions.Logging.Helpers.Tests", "tests\jjm.one.Serilog.Extensions.Logging.Helpers.Tests\jjm.one.Serilog.Extensions.Logging.Helpers.Tests.csproj", "{C4C6C89D-E6FA-403F-9FFE-34F3D7E4ED5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

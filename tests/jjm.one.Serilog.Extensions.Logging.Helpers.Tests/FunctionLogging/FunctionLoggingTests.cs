@@ -1,44 +1,40 @@
-using System;
 using System.Reflection;
 using Moq;
-using Serilog.Events;
 using Serilog;
+using Serilog.Events;
 
 namespace jjm.one.Serilog.Extensions.Logging.Helpers.Tests.FunctionLogging;
 
 /// <summary>
-/// This class contains the tests for the <see cref="FunctionLogging"/> class.
+///     This class contains the tests for the <see cref="FunctionLogging" /> class.
 /// </summary>
 public class FunctionLoggingTests
 {
     #region private members
-    
+
     private readonly Mock<ILogger> _logger;
-    
+
     #endregion
 
     #region ctors
 
     /// <summary>
-    /// The default constructor of the <see cref="FunctionLoggingTests"/> class.
+    ///     The default constructor of the <see cref="FunctionLoggingTests" /> class.
     /// </summary>
-    public FunctionLoggingTests()
-    {
-        _logger = new Mock<ILogger>();
-    }
+    public FunctionLoggingTests() => _logger = new Mock<ILogger>();
 
     #endregion
 
     #region tests
 
     /// <summary>
-    /// 1. test of the LogFctCall function.
+    ///     1. test of the LogFctCall function.
     /// </summary>
     [Fact]
     public void LogFctCallTest1()
     {
         // arrange
-        _logger.Setup(x => x.Write(LogEventLevel.Debug, 
+        _logger.Setup(x => x.Write(LogEventLevel.Debug,
             It.IsAny<string>(), It.IsAny<object?[]?>())).Verifiable();
 
         // act 
@@ -46,19 +42,19 @@ public class FunctionLoggingTests
 
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Debug,
-                "Function called: {ClassName} -> {FctName}", 
+                "Function called: {ClassName} -> {FctName}",
                 nameof(FunctionLoggingTests), nameof(LogFctCallTest1)),
-                Times.Once);
+            Times.Once);
     }
-    
+
     /// <summary>
-    /// 2. test of the LogFctCall function.
+    ///     2. test of the LogFctCall function.
     /// </summary>
     [Fact]
     public void LogFctCallTest2()
     {
         // arrange
-        _logger.Setup(x => x.Write(LogEventLevel.Debug, 
+        _logger.Setup(x => x.Write(LogEventLevel.Debug,
             It.IsAny<string>(), It.IsAny<object?[]?>())).Verifiable();
 
         // act 
@@ -66,13 +62,13 @@ public class FunctionLoggingTests
 
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Debug,
-                "Function called: {ClassName} -> {FctName}", 
+                "Function called: {ClassName} -> {FctName}",
                 nameof(FunctionLoggingTests), nameof(LogFctCallTest2)),
             Times.Once);
     }
-    
+
     /// <summary>
-    /// 1. test of the LogExcInFctCall function.
+    ///     1. test of the LogExcInFctCall function.
     /// </summary>
     [Fact]
     public void LogExcInFctCallTest1()
@@ -88,14 +84,14 @@ public class FunctionLoggingTests
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Error,
                 It.Is<Exception>(e => e == exc),
-                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}", 
-                nameof(FunctionLoggingTests), nameof(LogExcInFctCallTest1), 
+                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}",
+                nameof(FunctionLoggingTests), nameof(LogExcInFctCallTest1),
                 string.Empty),
             Times.Once);
     }
-    
+
     /// <summary>
-    /// 2. test of the LogExcInFctCall function.
+    ///     2. test of the LogExcInFctCall function.
     /// </summary>
     [Fact]
     public void LogExcInFctCallTest2()
@@ -111,14 +107,14 @@ public class FunctionLoggingTests
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Error,
                 It.Is<Exception>(e => e == exc),
-                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}", 
+                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}",
                 nameof(FunctionLoggingTests), nameof(LogExcInFctCallTest2),
-        "\nTestMSG"),
+                "\nTestMSG"),
             Times.Once);
     }
-    
+
     /// <summary>
-    /// 3. test of the LogExcInFctCall function.
+    ///     3. test of the LogExcInFctCall function.
     /// </summary>
     [Fact]
     public void LogExcInFctCallTest3()
@@ -129,20 +125,20 @@ public class FunctionLoggingTests
             It.IsAny<string>(), It.IsAny<object?[]?>())).Verifiable();
 
         // act 
-        _logger.Object.LogExcInFctCall(exc, GetType(), 
+        _logger.Object.LogExcInFctCall(exc, GetType(),
             MethodBase.GetCurrentMethod());
 
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Error,
                 It.Is<Exception>(e => e == exc),
-                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}", 
+                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}",
                 nameof(FunctionLoggingTests), nameof(LogExcInFctCallTest3),
                 string.Empty),
             Times.Once);
     }
-    
+
     /// <summary>
-    /// 4. test of the LogExcInFctCall function.
+    ///     4. test of the LogExcInFctCall function.
     /// </summary>
     [Fact]
     public void LogExcInFctCallTest4()
@@ -153,13 +149,13 @@ public class FunctionLoggingTests
             It.IsAny<string>(), It.IsAny<object?[]?>())).Verifiable();
 
         // act 
-        _logger.Object.LogExcInFctCall(exc, GetType(), 
+        _logger.Object.LogExcInFctCall(exc, GetType(),
             MethodBase.GetCurrentMethod(), "TestMSG");
 
         // assert
         _logger.Verify(x => x.Write(LogEventLevel.Error,
                 It.Is<Exception>(e => e == exc),
-                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}", 
+                "Exception thrown in: {ClassName} -> {FctName}{CustomMsg}",
                 nameof(FunctionLoggingTests), nameof(LogExcInFctCallTest4),
                 "\nTestMSG"),
             Times.Once);

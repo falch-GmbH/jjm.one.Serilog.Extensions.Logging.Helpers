@@ -4,10 +4,10 @@ A collection of helper functions for the [Serilog.Extensions.Logging](https://ww
 
 ## Status
 
-|                       |                       |
-|----------------------:|-----------------------|
-| Build & Test Status (main) | [![Build&Test](https://github.com/jjm-one/jjm.one.Serilog.Extensions.Logging.Helpers/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jjm-one/jjm.one.Serilog.Extensions.Logging.Helpers/actions/workflows/dotnet.yml) |
-| Nuget Package Version | [![Nuget Version](https://img.shields.io/nuget/v/jjm.one.Serilog.Extensions.Logging.Helpers?style=flat-square)](https://www.nuget.org/packages/jjm.one.Serilog.Extensions.Logging.Helpers/) |
+|                               |                                                                                                                                                                                                                                                         |
+| ----------------------------: | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    Build & Test Status (main) | [![Build&Test](https://github.com/jjm-one/jjm.one.Serilog.Extensions.Logging.Helpers/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jjm-one/jjm.one.Serilog.Extensions.Logging.Helpers/actions/workflows/dotnet.yml)                       |
+|         Nuget Package Version | [![Nuget Version](https://img.shields.io/nuget/v/jjm.one.Serilog.Extensions.Logging.Helpers?style=flat-square)](https://www.nuget.org/packages/jjm.one.Serilog.Extensions.Logging.Helpers/)                                                             |
 | SonarCloudQuality Gate Status | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jjm-one_jjm.one.Serilog.Extensions.Logging.Helpers&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jjm-one_jjm.one.Serilog.Extensions.Logging.Helpers) |
 
 ## Table of contents
@@ -29,15 +29,15 @@ You can get the latest version of this software as a nuget package form [nuget.o
 
 ### Installing the Nuget Package
 
-| Tool                 | Command/Code |
-|----------------------|--------------|
-| Package Manager      | ```PM> Install-Package jjm.one.Serilog.Extensions.Logging.Helper -Version X.Y.Z``` |
-| .NET CLI             | ```> dotnet add package jjm.one.Serilog.Extensions.Logging.Helper --version X.Y.Z``` |
-| PackageReference     | ```<PackageReference Include="jjm.one.Serilog.Extensions.Logging.Helper" Version="X.Y.Z" />``` |
-| Package CLI          | ```> paket add jjm.one.Serilog.Extensions.Logging.Helper --version X.Y.Z``` |
-| Script & Interactive | ```> #r "nuget: jjm.one.Serilog.Extensions.Logging.Helper, X.Y.Z"``` |
-| Cake as Addin        | ```#addin nuget:?package=jjm.one.Serilog.Extensions.Logging.Helper&version=X.Y.Z``` |
-| Cake as Tool         | ```#tool nuget:?package=jjm.one.Serilog.Extensions.Logging.Helper&version=X.Y.Z``` |
+| Tool                 | Command/Code                                                                               |
+| -------------------- | ------------------------------------------------------------------------------------------ |
+| Package Manager      | `PM> Install-Package jjm.one.Serilog.Extensions.Logging.Helper -Version X.Y.Z`             |
+| .NET CLI             | `> dotnet add package jjm.one.Serilog.Extensions.Logging.Helper --version X.Y.Z`           |
+| PackageReference     | `<PackageReference Include="jjm.one.Serilog.Extensions.Logging.Helper" Version="X.Y.Z" />` |
+| Package CLI          | `> paket add jjm.one.Serilog.Extensions.Logging.Helper --version X.Y.Z`                    |
+| Script & Interactive | `> #r "nuget: jjm.one.Serilog.Extensions.Logging.Helper, X.Y.Z"`                           |
+| Cake as Addin        | `#addin nuget:?package=jjm.one.Serilog.Extensions.Logging.Helper&version=X.Y.Z`            |
+| Cake as Tool         | `#tool nuget:?package=jjm.one.Serilog.Extensions.Logging.Helper&version=X.Y.Z`             |
 
 ## Usage
 
@@ -57,13 +57,13 @@ class MyClass {
         Log.Logger.LogFctCall(GetType(), MethodBase.GetCurrentMethod(), LogEventLevel.Debug);
 
         try {
-            
+
             //...
         }
         catch (Exception exc) {
 
-            // Log the exception (minimal parameters)      
-            Log.Logger.LogExcInFctCall(exc);      
+            // Log the exception (minimal parameters)
+            Log.Logger.LogExcInFctCall(exc);
 
             // Log the exception (full parameters)
             Log.Logger.LogExcInFctCall(exc, GetType(), MethodBase.GetCurrentMethod(), "My custom exception message!", LogEventLevel.Error);
