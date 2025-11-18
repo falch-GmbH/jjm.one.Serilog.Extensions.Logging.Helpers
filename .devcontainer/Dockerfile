@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     unzip \
     xz-utils \
     zip \
-    libglu1-mesa \
     software-properties-common \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -21,6 +20,7 @@ RUN curl -L https://dot.net/v1/dotnet-install.sh -o dotnet-install.sh \
     && chmod +x dotnet-install.sh \
     && ./dotnet-install.sh --channel 10.0 --install-dir /opt/dotnet \
     && rm dotnet-install.sh \
+    && ln -s /opt/dotnet /home/vscode/.dotnet \
     && export DOTNET_ROOT=/opt/dotnet \
     && export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
