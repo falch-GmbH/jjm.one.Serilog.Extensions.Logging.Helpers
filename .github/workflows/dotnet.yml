@@ -21,12 +21,12 @@ jobs:
         version: [10.x, 8.x]
     defaults:
       run:
-        working-directory: ./src
+        working-directory: ./
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup dotNET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ matrix.version }}
       - name: Restore dependencies
@@ -45,12 +45,12 @@ jobs:
         version: [10.x]
     defaults:
       run:
-        working-directory: ./src
+        working-directory: ./
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup dotNET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: ${{ matrix.version }}
       - name: Restore dependencies
@@ -70,31 +70,31 @@ jobs:
         with:
           java-version: 17
           distribution: "corretto" # Alternative distribution options are available.
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Cache SonarCloud packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
       - name: Cache SonarCloud scanner
         id: cache-sonar-scanner
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
       - name: Cache dotnet-coverage
         id: cache-dotnet-coverage
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .\.dotnet-coverage\dotnet-coverage
           key: ${{ runner.os }}-dotnet-coverage
           restore-keys: ${{ runner.os }}-dotnet-coverage
       - name: Setup dotNET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 10.x
       - name: Install SonarCloud scanner
@@ -115,13 +115,12 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          cd .\src
-          .\..\.sonar\scanner\dotnet-sonarscanner begin /k:"jjm-one_jjm.one.Serilog.Extensions.Logging.Helpers" /o:"jjm-one" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"jjm-one_jjm.one.Serilog.Extensions.Logging.Helpers" /o:"jjm-one" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
           dotnet restore
           dotnet build --no-restore -c Debug
-          .\..\.dotnet-coverage\dotnet-coverage\dotnet-coverage collect "dotnet test --no-build --verbosity normal" -f xml -o "coverage.xml"
+          .\.dotnet-coverage\dotnet-coverage\dotnet-coverage collect "dotnet test --no-build --verbosity normal" -f xml -o "coverage.xml"
           cat coverage.xml
-          .\..\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
   publish-doc:
     name: Publish Documentation
@@ -129,7 +128,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name != 'pull_request'
     steps:
-      - uses: DenverCoder1/doxygen-github-pages-action@v1.3.0
+      - uses: DenverCoder1/doxygen-github-pages-action@v2.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
