@@ -21,7 +21,7 @@
     <_ProjectCopyright>© 2026, jjm.one.</_ProjectCopyright>
     <_ProjectAuthors>Jonas Merkle [JJM]</_ProjectAuthors>
     <_ProjectName>jjm.one.Serilog.Extensions.Logging.Helpers</_ProjectName>
-    <Version>10.0.0</Version>
+    <Version>10.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup>
